@@ -15,7 +15,6 @@
     remote: "{{item.remote|default('origin')}}"
     repo: "{{item.repo}}"
     ssh_opts: "{{item.ssh_opts|default(None)}}"
-    update: "{{item.update|default('yes')}}"
     version: "{{item.version|default('HEAD')}}"
   when: item.dest|default("") != ""
   with_items: source_sources
