@@ -5,6 +5,17 @@
   sudo: yes
 
 - name: source-git | Ensure the repositories is synced
-  git: dest={{item.dest|default(source_default_dest)}} repo={{item.repo}} version={{item.version|default('HEAD')}} recursive={{item.recursive|default('yes')}} remote={{item.remote|default('origin')}} bare={{item.bare|default('no')}} key_file={{item.key_file|default('')}} accept_hostkey={{item.accept_hostkey|default('no')}}
+  git:
+    accept_hostkey: "{{item.accept_hostkey|default('no')}}"
+    bare: "{{item.bare|default('no')}}"
+    dest: "{{item.dest|default(source_default_dest)}}"
+    force: "{{item.force|default('yes')}}"
+    key_file: "{{item.key_file|default('')}}"
+    recursive: "{{item.recursive|default('yes')}}"
+    remote: "{{item.remote|default('origin')}}"
+    repo: "{{item.repo}}"
+    ssh_opts: "{{item.ssh_opts|default(None)}}"
+    update: "{{item.update|default('yes')}}"
+    version: "{{item.version|default('HEAD')}}"
   when: item.dest|default("") != ""
   with_items: source_sources

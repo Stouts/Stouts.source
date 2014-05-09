@@ -5,6 +5,11 @@
   sudo: yes
 
 - name: source-hg | Ensure the repositories is synced
-  git: dest={{item.dest|default(source_default_dest)}} repo={{item.repo}} revision={{item.revision|default('default')}} purge={{item.purge|default('no')}} force={{item.force|default('no')}}
+  hg:
+    dest: "{{item.dest|default(source_default_dest)}}"
+    force: "{{item.force|default('yes')}}"
+    purge: "{{item.purge|default('no')}}"
+    repo: "{{item.repo}}"
+    revision: "{{item.revision|default('default')}}"
   when: item.dest|default("") != ""
   with_items: source_sources

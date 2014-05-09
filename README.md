@@ -38,7 +38,7 @@ Example:
       - repo: https://github.com/Dipsomaniac/dj-simple.git
         dest: /usr/lib/simple/source
         key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
-        revision: "develop"
+        version: "develop"
 ```
 
 See [git-module](http://docs.ansible.com/git_module.html) and [hg-module](http://docs.ansible.com/hg_module.html) for source params.
