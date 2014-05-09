@@ -11,6 +11,7 @@ source_enabled: yes           # Enable role
 source_known_hosts: []        # Ensure the hosts in known_hosts
 source_sources: []            # Repositories to clone
 source_sources_type: git      # Set repository type (git, hg)
+source_copy_keys: []          # Copy defined key files from host to server in ~/.ssh/*
 source_default_dest:          # Default destination
 
 source_known_hosts_file: /home/{{ansible_ssh_user}}/.ssh/known_hosts
@@ -31,10 +32,13 @@ Example:
 
   vars:
     source_known_hosts: [github.com]
+    source_copy_keys:
+      - "{{inventory_dir}}/keys/deploy_key"
     source_sources:
       - repo: https://github.com/Dipsomaniac/dj-simple.git
-      - dest: /usr/lib/simple/source
-
+        dest: /usr/lib/simple/source
+        key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
+        revision: "develop"
 ```
 
 See [git-module](http://docs.ansible.com/git_module.html) and [hg-module](http://docs.ansible.com/hg_module.html) for source params.

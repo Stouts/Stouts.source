@@ -3,6 +3,9 @@
 - include: hosts.yml
   tags: [source, source-hosts]
 
+- include: keys.yml
+  tags: [source, source-keys]
+
 - include: git.yml repo=item
   when: source_sources_type == 'git'
   tags: [source, source-git]

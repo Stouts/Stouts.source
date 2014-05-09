@@ -1,10 +1,10 @@
 ---
 
-- name: Ensure mercurial installed
+- name: source-hg | Ensure mercurial installed
   apt: pkg=mercurial
   sudo: yes
 
-- name: Ensure the repositories is synced
+- name: source-hg | Ensure the repositories is synced
   git: dest={{item.dest|default(source_default_dest)}} repo={{item.repo}} revision={{item.revision|default('default')}} purge={{item.purge|default('no')}} force={{item.force|default('no')}}
   when: item.dest|default("") != ""
   with_items: source_sources

@@ -1,0 +1,5 @@
+---
+
+- name: source-keys | Copy keys
+  copy: src={{item}} dest=/home/{{ansible_ssh_user}}/.ssh/{{item.split('/')[-1]}} mode=0400
+  with_items: source_sources_keys
