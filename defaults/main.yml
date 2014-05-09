@@ -7,4 +7,4 @@ source_sources_type: git      # Set repository type (git, hg)
 source_copy_keys: []          # Copy defined key files from host to server in ~/.ssh/*
 source_default_dest:          # Default destination
 
-source_known_hosts_file: /home/{{ansible_ssh_user}}/.ssh/known_hosts
+source_known_hosts_file: ~{{ansible_ssh_user}}/.ssh/known_hosts
