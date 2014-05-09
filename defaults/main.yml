@@ -1,0 +1,9 @@
+---
+
+source_enabled: yes           # Enable role
+source_known_hosts: []        # Ensure the hosts in known_hosts
+source_sources: []            # Repositories to clone
+source_sources_type: git      # Set repository type (git, hg)
+source_default_dest:          # Default destination
+
+source_known_hosts_file: /home/{{ansible_ssh_user}}/.ssh/known_hosts

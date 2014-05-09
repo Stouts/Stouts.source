@@ -1,0 +1,10 @@
+---
+
+- name: Ensure git installed
+  apt: pkg=git
+  sudo: yes
+
+- name: Ensure the repositories is synced
+  git: dest={{item.dest|default(source_default_dest)}} repo={{item.repo}} version={{item.version|default('HEAD')}} recursive={{item.recursive|default('yes')}} remote={{item.remote|default('origin')}} bare={{item.bare|default('no')}} key_file={{item.key_file|default('')}}
+  when: item.dest|default("") != ""
+  with_items: source_sources
