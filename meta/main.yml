@@ -12,4 +12,7 @@ galaxy_info:
     versions:
     - all
   categories:
+  - cloud
+  - development
   - system
+  - web
