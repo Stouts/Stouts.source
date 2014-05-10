@@ -28,7 +28,7 @@ Example:
 - hosts: all
 
   roles:
-    - st.source
+    - Stouts.source
 
   vars:
     source_known_hosts: [github.com]
