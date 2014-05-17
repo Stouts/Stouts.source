@@ -4,6 +4,11 @@
   apt: pkg=git
   sudo: yes
 
+- name: source-git | Ensure private keys has mode 0400
+  file: dest={{item.key_file}} mode=0400
+  when: item.key_file is defined
+  with_items: source_sources
+
 - name: source-git | Ensure the repositories is synced
   git:
     accept_hostkey: "{{item.accept_hostkey|default('no')}}"
