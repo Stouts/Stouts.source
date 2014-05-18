@@ -6,6 +6,6 @@ source_sources: []                    # Repositories to clone
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
 source_default_dest: ""               # Default destination
-source_owner: ""                      # Set owner for cloned source
+source_owner: "{{ansible_ssh_user}}"  # Set owner for cloned source
 
 source_known_hosts_file: ~{{ansible_ssh_user}}/.ssh/known_hosts
