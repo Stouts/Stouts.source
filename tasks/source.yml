@@ -1,10 +1,7 @@
 ---
 
-- include: hosts.yml
-  tags: [source, source-hosts]
-
-- include: keys.yml
-  tags: [source, source-keys]
+- include: configure.yml
+  tags: [source, source-configure]
 
 - include: git.yml repo=item
   when: source_sources_type == 'git'
@@ -15,7 +12,6 @@
   tags: [source, source-hg]
 
 - name: Fix rights
-  file: name={{item.dest|default('source_default_dest')}} owner={{source_owner}} recurse=yes
-  when: source_owner != ""
+  file: name={{item.dest|default('source_default_dest')}} owner={{source_user}} recurse=yes
   with_items: source_sources
   tags: [source]

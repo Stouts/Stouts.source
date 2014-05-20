@@ -7,14 +7,18 @@ Ansible role wich manage source code from git or mercurial repositoires
 
 #### Variables
 ```yaml
-source_enabled: yes           # Enable role
-source_known_hosts: []        # Ensure the hosts in known_hosts
-source_sources: []            # Repositories to clone
-source_sources_type: git      # Set repository type (git, hg)
-source_copy_keys: []          # Copy defined key files from host to server in ~/.ssh/*
-source_default_dest:          # Default destination
+source_enabled: yes                   # Enable role
+source_sources: []                    # Repositories to clone
+source_sources_type: git              # Set repository type (git, hg)
+source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
+source_default_dest: ""               # Default destination
 
-source_known_hosts_file: /home/{{ansible_ssh_user}}/.ssh/known_hosts
+source_user: "{{ansible_ssh_user}}"   # Run from user
+source_user_ssh_home: ~{{source_user}}/.ssh
+
+source_fingerprints:
+   - "bitbucket.org,131.103.20.167 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=="
+   - "github.com,204.232.175.90 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
 ```
 
 #### Usage
@@ -31,7 +35,6 @@ Example:
     - Stouts.source
 
   vars:
-    source_known_hosts: [github.com]
     source_copy_keys:
       - "{{inventory_dir}}/keys/deploy_key"
     source_sources:
