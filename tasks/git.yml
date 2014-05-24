@@ -23,3 +23,5 @@
     version: "{{item.version|default('HEAD')}}"
   when: item.dest|default("") != ""
   with_items: source_sources
+  sudo: yes
+  sudo_user: "{{source_user}}"

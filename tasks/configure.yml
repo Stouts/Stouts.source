@@ -4,7 +4,7 @@
   user: name={{source_user}} createhome=yes
 
 - name: source-configure | Ensure user ssh home exists
-  file: state=directory path={{source_user_ssh_home}} owner={{source_user}}
+  file: state=directory path={{source_user_ssh_home}} owner={{source_user}} recurse=yes
 
 - name: source-configure | Copy SSH keys
   copy: src={{item}} dest={{source_user_ssh_home}}/{{item.split('/')[-1]}} mode=0400
