@@ -27,4 +27,4 @@ script:
 
 source_sources:
   - repo: https://github.com/Stouts/Stouts.source
-    dest: cloned
+    dest: clonned
