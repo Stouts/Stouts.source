@@ -23,7 +23,7 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  - ls -la
+  - test -f clonned/README.md || exit 1
 
 source_sources:
   - repo: https://github.com/Stouts/Stouts.source
