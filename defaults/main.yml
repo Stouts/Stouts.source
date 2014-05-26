@@ -7,6 +7,7 @@ source_copy_keys: []                  # Copy defined key files from host to serv
 source_default_dest: ""               # Default destination
 
 source_user: "{{ansible_ssh_user}}"   # Run from user
+source_group: "{{source_user}}"       # Run from user
 source_user_ssh_home: ~{{source_user}}/.ssh
 
 source_fingerprints:

@@ -3,6 +3,9 @@
 - name: source-configure | Ensure the source user exist
   user: name={{source_user}} createhome=yes
 
+- name: source-configure | Ensure the source group exist
+  group: name={{source_group}}
+
 - name: source-configure | Ensure user ssh home exists
   file: state=directory path={{source_user_ssh_home}} owner={{source_user}} recurse=yes
 
