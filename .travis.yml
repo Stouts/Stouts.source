@@ -28,3 +28,4 @@ script:
 source_sources:
   - repo: https://github.com/Stouts/Stouts.source
     dest: clonned
+source_reload_cmd: echo 'RELOADED'

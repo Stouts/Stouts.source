@@ -5,6 +5,8 @@ source_sources: []                    # Repositories to clone
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
 source_default_dest: ""               # Default destination
+source_reload_cmd: ":"                # Run the shell command when source has benn changed
+
 
 source_user: "{{ansible_ssh_user}}"   # Run from user
 source_group: "{{source_user}}"       # Run from user

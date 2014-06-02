@@ -12,8 +12,11 @@ source_sources: []                    # Repositories to clone
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
 source_default_dest: ""               # Default destination
+source_reload_cmd: ":"                # Run the shell command when source has benn changed
+
 
 source_user: "{{ansible_ssh_user}}"   # Run from user
+source_group: "{{source_user}}"       # Run from user
 source_user_ssh_home: ~{{source_user}}/.ssh
 
 source_fingerprints:
@@ -42,6 +45,7 @@ Example:
         dest: /usr/lib/simple/source
         key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
         version: "develop"
+    source_reload_cmd: reload uwsgi
 ```
 
 See [git-module](http://docs.ansible.com/git_module.html) and [hg-module](http://docs.ansible.com/hg_module.html) for source params.
@@ -53,4 +57,3 @@ Licensed under the MIT License. See the LICENSE file for details.
 #### Feedback, bug-reports, requests, ...
 
 Are [welcome](https://github.com/Stouts/Stouts.source/issues)!
-

@@ -15,3 +15,4 @@
   with_items: source_sources
   sudo: yes
   sudo_user: "{{source_user}}"
+  notify: source reload

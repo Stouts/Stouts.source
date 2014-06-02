@@ -23,6 +23,7 @@
     version: "{{item.version|default('HEAD')}}"
   when: item.dest|default("") != ""
   with_items: source_sources
+  notify: source reload
 
 - name: source-git | Fix directories
   file: dest={{item.dest|default(source_default_dest)}} state=directory owner={{source_user}} group={{source_group}}
