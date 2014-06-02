@@ -11,16 +11,16 @@
 
 - name: source-git | Ensure the repositories is synced
   git:
-    accept_hostkey: "{{item.accept_hostkey|default('no')}}"
-    bare: "{{item.bare|default('no')}}"
-    dest: "{{item.dest|default(source_default_dest)}}"
-    force: "{{item.force|default('yes')}}"
-    key_file: "{{item.key_file|default('')}}"
-    recursive: "{{item.recursive|default('yes')}}"
-    remote: "{{item.remote|default('origin')}}"
+    accept_hostkey: "{{item.accept_hostkey|default(source_default_accept_hostkey)}}"
+    bare: "{{item.bare|default(source_default_bare)}}"
+    dest: "{{item.dest}}"
+    force: "{{item.force|default(source_default_force)}}"
+    key_file: "{{item.key_file|default(source_default_key_file)}}"
+    recursive: "{{item.recursive|default(source_default_recursive)}}"
+    remote: "{{item.remote|default(source_default_remote)}}"
     repo: "{{item.repo}}"
-    ssh_opts: "{{item.ssh_opts|default(None)}}"
-    version: "{{item.version|default('HEAD')}}"
+    ssh_opts: "{{item.ssh_opts|default(source_default_ssh_opts)}}"
+    version: "{{item.version|default(source_default_version)}}"
   when: item.dest|default("") != ""
   with_items: source_sources
   notify: source reload
