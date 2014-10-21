@@ -1,4 +1,5 @@
 ---
 # vim:sw=2:ft=ansible
 - name: source reload
-  shell: "{{source_reload_cmd}}"
+  shell: "{{item}}"
+  with_items: source_reload_handlers

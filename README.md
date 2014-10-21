@@ -11,7 +11,9 @@ source_enabled: yes                   # Enable role
 source_sources: []                    # Repositories to clone
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
-source_reload_cmd: ":"                # Run the shell command when source has benn changed
+source_reload_handlers: []            # List of commands which will be run when source will have been updated
+                                      # Ex. source_reload_handlers:
+                                      #     - restart myservice
 
 source_user: "{{ansible_ssh_user}}"   # Run from user
 source_group: "{{source_user}}"       # Run from user
@@ -56,7 +58,8 @@ Example:
         dest: /usr/lib/simple/source
         key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
         version: "develop"
-    source_reload_cmd: reload uwsgi
+    source_reload_handlers:
+    - reload uwsgi
 ```
 
 See [git-module](http://docs.ansible.com/git_module.html) and [hg-module](http://docs.ansible.com/hg_module.html) for source params.
