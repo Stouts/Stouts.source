@@ -2,8 +2,7 @@ Stouts.source
 =============
 
 [![Build Status](http://img.shields.io/travis/Stouts/Stouts.source.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.source)
-[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.source-blue.svg?style=flat-square)](https://galaxy.source.com/list#/roles/851)
-[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.source.svg?style=flat-square)]()
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.source-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/851)
 
 Ansible role wich manage source code from git or mercurial repositoires
 
