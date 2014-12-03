@@ -3,7 +3,7 @@
 - include: configure.yml
   tags: [source, source-configure]
 
-- include: git.yml repo=item
+- include: git.yml
   when: source_sources_type == 'git'
   tags: [source, source-git]
 

@@ -26,6 +26,6 @@ script:
   - ls -la clonned | grep README.md || exit 1
 
 source_sources:
-  - repo: https://github.com/Stouts/Stouts.source
-    dest: clonned
-source_reload_cmd: echo 'RELOADED'
+- repo: https://github.com/Stouts/Stouts.source
+  dest: clonned
+  handlers: [ echo 'RELOADED' ]

@@ -1,5 +1,11 @@
 ---
 # vim:sw=2:ft=ansible
-- name: source reload
-  shell: "{{item}}"
-  with_items: source_reload_handlers
+- name: source git reload
+  shell: "{{item.item.handlers|join('; ')}}"
+  when: item.changed
+  with_items: source_git_changed.results
+
+- name: source hg reload
+  shell: "{{item.item.handlers|join('; ')}}"
+  when: item.changed
+  with_items: source_hg_changed.results
