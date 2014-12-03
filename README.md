@@ -4,18 +4,31 @@ Stouts.source
 [![Build Status](http://img.shields.io/travis/Stouts/Stouts.source.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.source)
 [![Galaxy](http://img.shields.io/badge/galaxy-Stouts.source-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/851)
 
-Ansible role wich manage source code from git or mercurial repositoires
+Ansible role wich manage sources from git or mercurial repositoires.
+
+The role is allowing you to clone sources from git or mercurial repositories to
+your servers and run handlers when it was updated.
 
 #### Variables
 ```yaml
 source_enabled: yes                   # Enable role
 source_sources: []                    # Repositories to clone
+                                      # Define your sources here
+                                      # Ex: source_sources:
+                                        #   - repo: git@github.com:my/repo1.git
+                                        #     dest: /some/destination/path
+                                        #     version: develop
+                                        #     handlers:
+                                        #     - sudo restart myservice
+                                        #   - repo: git@github.com:my/repo2.git
+                                        #     dest: /some/another/path
+                                        #     version: master
+                                        #     handlers:
+                                        #     - cd /some/another/path && make static db
+                                        #     - sudo /etc/init.d/service restart
+
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
-source_reload_handlers: []            # List of commands which will be run when source will have been updated
-                                      # Ex. source_reload_handlers:
-                                      #     - restart myservice
-
 source_user: "{{ansible_ssh_user}}"   # Run from user
 source_group: "{{source_user}}"       # Run from user
 source_user_ssh_home: ~{{source_user}}/.ssh
@@ -34,8 +47,8 @@ source_default_revision: default      # Default revision (branch, tag, commit) (
 source_default_purge: no              # Default purge (hg)
 
 source_fingerprints:
-   - "bitbucket.org,131.103.20.167 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=="
-   - "github.com,204.232.175.90 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+- "bitbucket.org,131.103.20.167 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=="
+- "github.com,204.232.175.90 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
 ```
 
 #### Usage
@@ -53,14 +66,14 @@ Example:
 
   vars:
     source_copy_keys:
-      - "{{inventory_dir}}/keys/deploy_key"
+     - "{{inventory_dir}}/keys/deploy_key"
     source_sources:
-      - repo: https://github.com/Dipsomaniac/dj-simple.git
-        dest: /usr/lib/simple/source
-        key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
-        version: "develop"
-    source_reload_handlers:
-    - reload uwsgi
+    - repo: https://github.com/Dipsomaniac/dj-simple.git
+      dest: /usr/lib/simple/source
+      key_file: "/home/{{ansible_ssh_user}}/.ssh/deploy_key"
+      version: "develop"
+      handlers:
+      - reload uwsgi
 ```
 
 See [git-module](http://docs.ansible.com/git_module.html) and [hg-module](http://docs.ansible.com/hg_module.html) for source params.
