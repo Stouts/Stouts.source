@@ -25,6 +25,8 @@
   with_items: source_sources
   notify: source git reload
   register: source_git_changed
+  sudo: true
+  sudo_user: "{{source_user}}"
 
 - name: source-git | Fix directories
   file: dest={{item.dest|default(source_default_dest)}} state=directory owner={{source_user}} group={{source_group}}

@@ -23,3 +23,7 @@
     dest="{{source_user_ssh_home}}/known_hosts"
     owner="{{source_user}}"
   with_items: source_fingerprints
+
+- name: source-configure | Ensure source directory exists
+  with_items: source_sources
+  file: state=directory path={{item.dest}} owner={{source_user}} recurse=yes
