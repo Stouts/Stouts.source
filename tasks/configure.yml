@@ -10,7 +10,7 @@
   file: state=directory path={{source_user_ssh_home}} owner={{source_user}} recurse=yes
 
 - name: source-configure | Copy SSH keys
-  copy: src={{item}} dest={{source_user_ssh_home}}/{{item.split('/')[-1]}} mode=0400
+  copy: src={{item}} dest={{source_user_ssh_home}}/{{item.split('/')[-1]}} mode=0400 owner={{source_user}}
   with_items: source_copy_keys
 
 - name: source-configure | Setup SSH hosts
