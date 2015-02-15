@@ -2,6 +2,8 @@
 # vim:sw=2:ft=ansible
 - name: source git reload
   shell: "{{item.item.handlers|join('; ')}}"
+  sudo: yes
+  sudo_user: "{{source_user}}"
   when: item.changed and item.item.handlers is defined
   with_items: source_git_changed.results
 
