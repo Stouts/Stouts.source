@@ -22,8 +22,8 @@ source_ssh_keys: []                   # Copy keys from variables
                                       #   source_ssh_keys:
                                       #   - file_name: deploy
                                       #     private_key: "KEY CONTENT"
-source_user: "{{ansible_user}}"   # Run from user
-source_group: "{{source_user}}"       # Run from user
+source_user: "{{deploy_user|default('deploy')}}" # Run from user
+source_group: "{{source_user}}"       # Run from group
 source_user_ssh_home: ~{{source_user}}/.ssh
 
 # Repository defaults (could be replaced individually)
