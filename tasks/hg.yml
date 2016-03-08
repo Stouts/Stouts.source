@@ -1,8 +1,8 @@
 ---
 
 - name: source-hg | Ensure mercurial installed
-  apt: pkg=mercurial
-  sudo: yes
+  apt: name=mercurial
+  become: yes
 
 - name: source-hg | Ensure the repositories is synced
   hg:
@@ -12,8 +12,7 @@
     repo: "{{item.repo}}"
     revision: "{{item.revision|default(source_default_revision)}}"
   when: item.dest|default("") != ""
-  with_items: source_sources
-  sudo: yes
-  sudo_user: "{{source_user}}"
+  with_items: "{{source_sources}}"
+  become_user: "{{source_user}}"
   notify: source hg reload
   register: source_hg_changed

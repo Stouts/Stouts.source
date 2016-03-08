@@ -18,6 +18,10 @@ source_sources: []                    # Repositories to clone
 
 source_sources_type: git              # Set repository type (git, hg)
 source_copy_keys: []                  # Copy defined key files from host to server in ~/.ssh/*
+source_ssh_keys: []                   # Copy keys from variables
+                                      #   source_ssh_keys:
+                                      #   - file_name: deploy
+                                      #     private_key: "KEY CONTENT"
 source_user: "{{ansible_ssh_user}}"   # Run from user
 source_group: "{{source_user}}"       # Run from user
 source_user_ssh_home: ~{{source_user}}/.ssh
